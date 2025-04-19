@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  app:
+    image: webdevops/php-nginx-dev:8.2
+    container_name: symfony_app
+    working_dir: /app
+    volumes:
+      - .:/app
+    environment:
+      - WEB_DOCUMENT_ROOT=/app/public
+      - SYMFONY_ENV=dev
+    ports:
+      - "8080:80"
+    depends_on:
+      - database
+
+
+  database:
+    image: mysql:8.0
+    container_name: symfony_db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-app}
+      MYSQL_USER: ${MYSQL_USER:-app}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-!ChangeMe!}
+    volumes:
+      - database_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: symfony_phpmyadmin
+    environment:
+      PMA_HOST: database
+      PMA_USER: ${MYSQL_USER:-app}
+      PMA_PASSWORD: ${MYSQL_PASSWORD:-!ChangeMe!}
+    ports:
+      - "8081:80"
+    depends_on:
+      - database
+
+volumes:
+  database_data:
