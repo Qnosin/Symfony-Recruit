@@ -3,16 +3,18 @@
 namespace App\Tests\Unit;
 
 use App\Command\CreateDataFromCsvCommand;
+use App\Processor\LorotomProcessor;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\Persistence\ObjectRepository;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
-use Symfony\Component\Serializer\Encoder\DecoderInterface;
+use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\SerializerInterface;
+
 
 
 class CreateDataFromCsvCommandTest extends TestCase
@@ -23,7 +25,7 @@ class CreateDataFromCsvCommandTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->serializer = $this->createMock(SerializerInterface::class);
+        $this->serializer = new Serializer([], [new CsvEncoder()]);
         $this->entityManager = $this->createMock(EntityManagerInterface::class);
 
         $this->dataManager = new CreateDataFromCsvCommand(
@@ -40,7 +42,10 @@ class CreateDataFromCsvCommandTest extends TestCase
 
     public function testShouldReturnEmptyDataInArray(): void
     {
-        $this->serializer->method('decode')->willReturn([]);
+
+        $repositoryMock = $this->createMock(EntityRepository::class);
+        $repositoryMock->method('findOneBy')->willReturn(null);
+        $this->entityManager->method('getRepository')->willReturn($repositoryMock);
 
         $this->entityManager->expects($this->never())->method('persist');
         $this->entityManager->expects($this->never())->method('flush');
@@ -67,37 +72,24 @@ class CreateDataFromCsvCommandTest extends TestCase
     public function testShouldReturnOneDataInArray(): void
     {
 
-        $csvRow = [
-            ['123', 'MPN123', 'Test Product', 'TestProducer', '5', '99.99', '1234567890123']
-        ];
+        $repositoryMock = $this->createMock(EntityRepository::class);
+        $repositoryMock->method('findOneBy')->willReturn(null);
 
 
-        $serializer = $this->createMock(SerializerInterface::class);
-        $serializer->method('decode')->willReturn($csvRow);
+        $this->entityManager->method('getRepository')->willReturn($repositoryMock);
+        $this->entityManager->expects($this->once())->method('persist');
+        $this->entityManager->expects($this->once())->method('flush');
 
-
-        $repository = $this->createMock(EntityRepository::class);
-        $repository->method('findOneBy')->willReturn(null);
-
-        $entityManager = $this->createMock(EntityManagerInterface::class);
-        $entityManager->method('getRepository')->willReturn($repository);
-        $entityManager->expects($this->once())->method('persist');
-        $entityManager->expects($this->once())->method('flush');
-
-
-        $command = new CreateDataFromCsvCommand($serializer, $entityManager);
-
+        $command = new CreateDataFromCsvCommand($this->serializer, $this->entityManager);
 
         $csvPath = sys_get_temp_dir() . '/one_item.csv';
-        file_put_contents($csvPath, "123\tMPN123\tTest Product\tTestProducer\t5\t99.99\t1234567890123");
-
+        file_put_contents($csvPath, "123;MPN123;Test Product;TestProducer;5;99.99;1234567890123");
 
         $input = new ArrayInput([
             'path' => $csvPath,
-            'supplier' => 'lorotom',
+            'supplier' => 'trah',
         ]);
         $output = new BufferedOutput();
-
 
         $result = $command->run($input, $output);
 
@@ -112,7 +104,7 @@ class CreateDataFromCsvCommandTest extends TestCase
         $command = new CreateDataFromCsvCommand($this->serializer, $this->entityManager);
 
         $testCsvPath = sys_get_temp_dir() . '/unknown_supplier.csv';
-        file_put_contents($testCsvPath, "some,data,to,test");
+        file_put_contents($testCsvPath, "dummy,data,to,test");
 
         $input = new ArrayInput([
             'path' => $testCsvPath,
@@ -120,10 +112,10 @@ class CreateDataFromCsvCommandTest extends TestCase
         ]);
         $output = new BufferedOutput();
 
-        $result = $command->run($input, $output);
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Unknown supplier: unknown_supplier');
+        $command->run($input, $output);
 
-        $this->assertEquals(Command::FAILURE, $result);
-        $this->assertStringContainsString('Unknown supplier', $output->fetch());
 
         unlink($testCsvPath);
     }

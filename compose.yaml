@@ -1,5 +1,9 @@
 version: '3.8'
 
+networks:
+  app_network:
+    driver: bridge
+
 services:
   app:
     image: webdevops/php-nginx-dev:8.2

@@ -38,6 +38,7 @@ class CreateDataFromCsvCommand extends  Command
     public function execute(InputInterface $input, OutputInterface $output){
         $path = $input->getArgument('path');
         $supplier = $input->getArgument('supplier');
+        $persisted = false;
 
         if (!file_exists($path)) {
             $output->writeln("<error>File not found at $path</error>");
@@ -49,7 +50,7 @@ class CreateDataFromCsvCommand extends  Command
         $delimiter = match (strtolower($supplier)) {
             'lorotom' => "\t",
             'trah' => ";",
-            default => '',
+            default => throw new \InvalidArgumentException("Unknown supplier: $supplier"),
         };
 
         $flag = match (strtolower($supplier)) {
@@ -100,18 +101,17 @@ class CreateDataFromCsvCommand extends  Command
             $item->setQuantity($processed['quantity']);
             $item->setPrice($processed['price']);
             $this->em->persist($item);
+            $persisted = true;
         }
 
-        $this->em->flush();
+        if($persisted){
+            $this->em->flush();
+        }
         $output->writeln('<info>Import completed</info>');
         return Command::SUCCESS;
 
     }
 
-
-    public function getCsvRowsAsArrays(): array{
-        return [];
-    }
 
     public function getCommandName():string{
          return  self::$defaultName;

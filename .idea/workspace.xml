@@ -5,12 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c5f5eb62-6516-4613-bba2-291b457d088f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Command/CreateDataFromCsvCommand.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Processor/LorotomProcessor.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Processor/TrahProcessor.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/Unit/CreateDataFromCsvCommandTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/functional/StockApiControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.dev" beforeDir="false" afterPath="$PROJECT_DIR$/.env.dev" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.test" beforeDir="false" afterPath="$PROJECT_DIR$/.env.test" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php-test-framework.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php-test-framework.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compose.override.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/doctrine.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/doctrine.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phpunit.xml.dist" beforeDir="false" afterPath="$PROJECT_DIR$/phpunit.xml.dist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Command/CreateDataFromCsvCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Command/CreateDataFromCsvCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Unit/CreateDataFromCsvCommandTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Unit/CreateDataFromCsvCommandTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +41,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpDebugGeneral" listening_started="true" />
-  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="D:\xamppp\php\php.exe">
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="app">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/psr/log" />
       <path value="$PROJECT_DIR$/vendor/symfony/cache" />
@@ -159,6 +168,9 @@
       <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
       <path value="$PROJECT_DIR$/vendor/doctrine/deprecations" />
       <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-bundle" />
+      <path value="$PROJECT_DIR$/vendor/willdurand/jsonp-callback-validator" />
+      <path value="$PROJECT_DIR$/vendor/willdurand/negotiation" />
+      <path value="$PROJECT_DIR$/vendor/friendsofsymfony/rest-bundle" />
     </include_path>
   </component>
   <component name="ProjectColorInfo">{
@@ -174,19 +186,20 @@
     "PHPUnit.CreateDataFromCsvCommandTest (2).executor": "Run",
     "PHPUnit.CreateDataFromCsvCommandTest.executor": "Run",
     "PHPUnit.Main.executor": "Run",
+    "PHPUnit.StockApiControllerTest.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "com.jetbrains.php.phpunit.codeGeneration.PhpNewTestDialog.defaultLibrary": "PHPUnit",
-    "credentialsType com.jetbrains.php.remote.interpreter.ui.PhpCreateRemoteSdkForm": "Docker",
-    "credentialsType com.jetbrains.php.remote.interpreter.ui.PhpInplaceEditRemoteSdkForm": "Docker",
+    "credentialsType com.jetbrains.php.remote.interpreter.ui.PhpCreateRemoteSdkForm": "Docker Compose",
+    "credentialsType com.jetbrains.php.remote.interpreter.ui.PhpInplaceEditRemoteSdkForm": "WSL",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "D:/Symfony-rec-task",
+    "last_opened_file_path": "D:/Symfony-rec-task/tests/functional",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "terminal",
+    "settings.editor.selected.configurable": "reference.webide.settings.project.settings.php",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -209,7 +222,7 @@
     <configuration name="CreateDataFromCsvCommandTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <CommandLine>
         <PhpTestInterpreterSettings>
-          <option name="interpreterName" value="webdevops/php-nginx-dev:8.2" />
+          <option name="interpreterName" value="app" />
         </PhpTestInterpreterSettings>
       </CommandLine>
       <TestRunner class="App\Tests\Unit\CreateDataFromCsvCommandTest" configuration_file="/opt/project/phpunit.xml.dist" file="$PROJECT_DIR$/tests/Unit/CreateDataFromCsvCommandTest.php" scope="Class" />
@@ -219,7 +232,25 @@
       <TestRunner configuration_file="$PROJECT_DIR$/phpunit.xml.dist" scope="XML" use_alternative_configuration_file="true" />
       <method v="2" />
     </configuration>
+    <configuration name="StockApiControllerTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <CommandLine>
+        <envFiles>
+          <find>$PROJECT_DIR$/.env.test</find>
+        </envFiles>
+        <PhpTestInterpreterSettings>
+          <option name="interpreterName" value="app" />
+        </PhpTestInterpreterSettings>
+      </CommandLine>
+      <option name="envFilePaths">
+        <list>
+          <option value="$PROJECT_DIR$/.env.test" />
+        </list>
+      </option>
+      <TestRunner class="App\Tests\functional\StockApiControllerTest" configuration_file="/app/phpunit.xml.dist" directory="$PROJECT_DIR$/tests/functional" file="$PROJECT_DIR$/tests/functional/StockApiControllerTest.php" scope="Class" />
+      <method v="2" />
+    </configuration>
     <list>
+      <item itemvalue="PHPUnit.StockApiControllerTest" />
       <item itemvalue="PHPUnit.CreateDataFromCsvCommandTest" />
       <item itemvalue="PHPUnit.Main" />
       <item itemvalue="PHPUnit.CreateDataFromCsvCommandTest (2)" />
@@ -250,7 +281,8 @@
       <workItem from="1744999736995" duration="1241000" />
       <workItem from="1745052132100" duration="732000" />
       <workItem from="1745052884657" duration="3743000" />
-      <workItem from="1745074801503" duration="12274000" />
+      <workItem from="1745074801503" duration="13438000" />
+      <workItem from="1745414438643" duration="18433000" />
     </task>
     <servers />
   </component>
@@ -262,6 +294,6 @@
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Symfony_rec_task@CreateDataFromCsvCommandTest.xml" NAME="CreateDataFromCsvCommandTest Coverage Results" MODIFIED="1745086916377" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="PhpCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Symfony_rec_task@CreateDataFromCsvCommandTest.xml" NAME="CreateDataFromCsvCommandTest Coverage Results" MODIFIED="1745419673180" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="PhpCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
