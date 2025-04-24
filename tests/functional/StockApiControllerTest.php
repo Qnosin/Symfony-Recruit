@@ -39,9 +39,6 @@ class StockApiControllerTest extends WebTestCase
 
     public function testGetStocksWithMpn(){
 
-        dump($_ENV['APP_ENV']);
-        dump($_ENV['DATABASE_URL']);
-
         $client = static::createClient();
 
         $entityManager = self::getContainer()->get(EntityManagerInterface::class);
