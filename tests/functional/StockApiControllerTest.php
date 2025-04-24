@@ -10,6 +10,28 @@ use Symfony\Component\HttpFoundation\Response;
 class StockApiControllerTest extends WebTestCase
 {
 
+    public static function setUpBeforeClass(): void
+    {
+        // Boot kernel manually to access container before client is created
+        self::bootKernel();
+
+        $container = self::$kernel->getContainer();
+
+        $connection = $container->get('doctrine')->getConnection();
+
+        try {
+            $connection->executeQuery('SELECT 1');
+        } catch (Exception $e) {
+            $params = $connection->getParams();
+            $dbname = $params['dbname'];
+            unset($params['dbname']);
+            $tmpConnection = \Doctrine\DBAL\DriverManager::getConnection($params);
+            $tmpConnection->getSchemaManager()->createDatabase($dbname);
+        }
+
+        exec('php bin/console doctrine:schema:update --force --env=test');
+    }
+
     private function createStockItem(EntityManagerInterface $entityManager, string $mpn, string $ean): StockItem
     {
 

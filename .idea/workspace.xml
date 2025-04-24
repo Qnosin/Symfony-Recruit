@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5f5eb62-6516-4613-bba2-291b457d088f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="c5f5eb62-6516-4613-bba2-291b457d088f" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -179,7 +177,7 @@
     "credentialsType com.jetbrains.php.remote.interpreter.ui.PhpCreateRemoteSdkForm": "Docker Compose",
     "credentialsType com.jetbrains.php.remote.interpreter.ui.PhpInplaceEditRemoteSdkForm": "WSL",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "D:/Symfony-rec-task/tests/functional",
+    "last_opened_file_path": "D:/symfony-rec-task-2",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -269,6 +267,7 @@
       <workItem from="1745052884657" duration="3743000" />
       <workItem from="1745074801503" duration="13438000" />
       <workItem from="1745414438643" duration="19253000" />
+      <workItem from="1745500203290" duration="1742000" />
     </task>
     <servers />
   </component>
