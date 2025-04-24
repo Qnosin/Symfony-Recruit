@@ -73,6 +73,8 @@ GET /api/get-stocks?mpn=19-598&ean=7612720201662
 ]
 ```
 
+![Image](https://github.com/user-attachments/assets/0405582b-1c9b-4f2b-8b69-91fb32c177b2)
+
 
 
 ##  🗃️ Struktura danych w Stock Items
