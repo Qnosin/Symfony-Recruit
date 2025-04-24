@@ -24,6 +24,11 @@ docker exec -it symfony_app php bin/console doctrine:database:create --env=test
 docker exec -it symfony_app php bin/console doctrine:schema:update --force --env=test
 ```
 
+<p>Plik compose zawiera 3 kontenery odpowiadające za:</p>
+<p>symfony_db - mysql:8.0</p>
+<p>symfony_phpmyadmin - phpmyadmin do podglądu bazy danych</p>
+<p>symfony_app - aplikacje w symfony</p>
+
 
 
 ## 🧾Import CSV
