@@ -18,10 +18,10 @@ git clone https://github.com/Qnosin/Symfony-Recruit.git
 cd Symfont-Recruit
 docker-compose up -d
 docker exec -it symfony_app composer install
-docker exec -it symfony_app bin/console doctrine:database:create 
-docker exec -it symfony_app bin/console doctrine:schema:update 
-docker exec -it symfony_app bin/console doctrine:database:create --env=test
-docker exec -it symfony_app bin/console doctrine:schema:update --force --env=test
+docker exec -it symfony_app php bin/console doctrine:database:create // if not exist 
+docker exec -it symfony_app php bin/console doctrine:schema:update --force
+docker exec -it symfony_app php bin/console doctrine:database:create --env=test
+docker exec -it symfony_app php bin/console doctrine:schema:update --force --env=test
 ```
 
 
@@ -98,12 +98,11 @@ W projekcie znajdują się testy funcjonalne jak i unit testy, były przezemnie 
 
 ### Uruchamianie testów:
 
-- W PhpStormie możesz uruchomić testy klikając prawym przyciskiem myszy na konkretną klasę testową.
-- Alternatywnie możesz skorzystać z terminala:
-
-```bash
-docker exec -it symfony_app php bin/phpunit
-```
+- W terminalu wpisujemy
+  ```bash
+   docker exec -it symfony_app php bin/phpunit tests/functional/StockApiControllerTest.php // by sprawdzić testy funkcjonalne
+   docker exec -it symfony_app php bin/phpunit tests/Unit/CreateDataFromCsvCommandTest.php // by sprawdzic testy jednostkowe
+  ```
 
 ## Pokrycie testami
 
